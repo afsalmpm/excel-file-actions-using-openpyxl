@@ -1,0 +1,14 @@
+def write_list_of_list_to_excel(file_name, sheet_name, row_start, column_start,
+                                list_of_list_to_be_added):
+    excel_file_name = file_name.xlsx"
+    excel_file = openpyxl.load_workbook(excel_file_name)  # To read the file
+    sheet_n = excel_file[sheet_name]  # To store the sheet
+    for i in list_of_list_to_be_added:
+        column_start_in_iteration = column_start
+        for j in i:
+            sheet_n.cell(row=row_start, column=column_start_in_iteration, value=j)
+            sheet_n.cell(row=row_start, column=column_start_in_iteration).alignment = Alignment(
+                horizontal='center')  # To make the cell value in the ceter
+            column_start_in_iteration = column_start_in_iteration + 1
+        row_start = row_start + 1
+    excel_file.save(excel_file_name)
